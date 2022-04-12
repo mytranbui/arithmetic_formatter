@@ -12,21 +12,28 @@ def add_time(start, duration, day=None):
     add_hr = int(total_min / 60)
     print("+", add_hr, "hr")
     total_hr = (int(start_time[0]) + int(duration_hr_mn[0]) + add_hr)
-    if total_hr == 0:
-        total_hr = 12
     chg_ampm = int(total_hr / 12) % 2
+    next_day = int(total_hr / 24)
+    print("no int",total_hr / 24)
+    print("intint", next_day)
     if chg_ampm == 1 and ampm == "AM":
         ampm = "PM"
-    if chg_ampm == 1 and ampm == "PM":
+    elif chg_ampm == 1 and ampm == "PM":
+        print("chg!")
         ampm = "AM"
+        next_day += 1
     print(chg_ampm, "ampm")
-    new_time = str(total_hr % 12) + ':' + str(total_min % 60).rjust(2, '0') + ' ' + ampm
+    print(total_hr," hrs")
+    total_hr %= 12
+    if total_hr % 12 == 0:
+        total_hr = 12
+    new_time = str(total_hr) + ':' + str(total_min % 60).rjust(2, '0') + ' ' + ampm
     if day != None:
         new_time += ", " + day
     if next_day == 1:
         new_time += " (next day)"
     elif next_day > 1:
-        new_time += " (" + next_day + " days later)"
+        new_time += " (" + str(next_day) + " days later)"
     return new_time
 
 def main():
@@ -50,5 +57,8 @@ def main():
     print("------------------------------------")
     print(add_time("6:30 PM", "205:12"))
     print("Expected : 7:42 AM (9 days later)")
+    print("------------------------------------")
+    print(add_time("11:55 AM", "3:12"))
+    print("Expected : 3:07 PM")
 
 main()
