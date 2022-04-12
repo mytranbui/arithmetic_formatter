@@ -19,7 +19,6 @@ def add_time(start, duration, day=None):
     if chg_ampm == 1 and ampm == "AM":
         ampm = "PM"
     elif chg_ampm == 1 and ampm == "PM":
-        print("chg!")
         ampm = "AM"
         next_day += 1
     print(chg_ampm, "ampm")
@@ -60,5 +59,14 @@ def main():
     print("------------------------------------")
     print(add_time("11:55 AM", "3:12"))
     print("Expected : 3:07 PM")
+    print("------------------------------------")
+    print(add_time("8:16 PM", "466:02", "tuesday"))
+    print("Expected : 6:18 AM, Monday (20 days later)")
+    print("------------------------------------")
+    print(add_time("2:59 AM", "24:00", "saturDay"))
+    print("Expected : 2:59 AM, Sunday (next day)")
+    print("------------------------------------")
+    print(add_time("11:59 PM", "24:05", "Wednesday"))
+    print("Expected : 12:04 AM, Friday (2 days later)")
 
 main()
