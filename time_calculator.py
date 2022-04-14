@@ -26,64 +26,72 @@ weekday = {
     7: sunday
     }
 
+## Only works with python3
+# def match_day(day):
+#     match day:
+#         case "Monday":
+#             return 1
+#         case "Tuesday":
+#             return 2
+#         case "Wednesday":
+#             return 3
+#         case "Thursday":
+#             return 4
+#         case "Friday":
+#             return 5
+#         case "Saturday":
+#             return 6
+#         case "Sunday":
+#             return 7
+#         case _:
+#             return 0
+
 def match_day(day):
-    match day:
-        case "Monday":
-            return 1
-        case "Tuesday":
-            return 2
-        case "Wednesday":
-            return 3
-        case "Thursday":
-            return 4
-        case "Friday":
-            return 5
-        case "Saturday":
-            return 6
-        case "Sunday":
-            return 7
-        case _:
-            return 0
+    if day == "Monday":
+       return 1
+    elif day == "Tuesday":
+       return 2
+    elif day == "Wednesday":
+       return 3
+    elif day == "Thursday":
+       return 4
+    elif day == "Friday":
+       return 5
+    elif day == "Saturday":
+       return 6
+    elif day == "Sunday":
+       return 7
+    else:
+       return 0
 
 def which_day(day, add_day):
+    if match_day(day) == 0:
+        return "Incorrect day"
     nbr = (match_day(day) + add_day % 7) % 7
     nbr = 7 if nbr == 0 else nbr
-    print(nbr)
     day = weekday[nbr]()
     return day
 
 def add_time(start, duration, day=None):
-    print(start, duration, day)
-    next_day = 0
     start_list = start.split()
     ampm = start_list[1]
-    # print(ampm)
-    start_time = start_list[0].split(':')
-    # print(start_time)
+    start_hr_mn = start_list[0].split(':')
     duration_hr_mn = duration.split(':')
-    total_min = int(start_time[1]) + int(duration_hr_mn[1])
-    # print(total_min, "min")
+    total_min = int(start_hr_mn[1]) + int(duration_hr_mn[1])
     add_hr = int(total_min / 60)
-    # print("+", add_hr, "hr")
-    total_hr = (int(start_time[0]) + int(duration_hr_mn[0]) + add_hr)
+    total_hr = int(start_hr_mn[0]) + int(duration_hr_mn[0]) + add_hr
     chg_ampm = int(total_hr / 12) % 2
     next_day = int(total_hr / 24)
-    # print("no int",total_hr / 24)
-    # print("intint", next_day)
     if chg_ampm == 1 and ampm == "AM":
         ampm = "PM"
     elif chg_ampm == 1 and ampm == "PM":
         ampm = "AM"
         next_day += 1
-    # print(chg_ampm, "ampm")
-    # print(total_hr," hrs")
     total_hr %= 12
-    # print(total_hr," hrs")
     total_hr = 12 if total_hr == 0 else total_hr
     new_time = str(total_hr) + ':' + str(total_min % 60).rjust(2, '0') + ' ' + ampm
     if day != None:
-        day = which_day(day[0].upper() + day[1:].lower(), next_day)
-        new_time += ", " + day
+        new_time += ", " + which_day(day[0].upper() + day[1:].lower(), next_day)
     if next_day == 1:
         new_time += " (next day)"
     elif next_day > 1:
@@ -123,5 +131,7 @@ def main():
     print("------------------------------------")
     print("Result :  ",add_time("11:59 PM", "24:05", "Wednesday"))
     print("Expected : 12:04 AM, Friday (2 days later)")
+    print("------------------------------------")
+    print("Result :  ",add_time("11:59 PM", "24:05", "ndy"))
 
 main()
