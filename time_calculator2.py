@@ -1,76 +1,28 @@
-def monday():
-    return "Monday"
-def tuesday():
-    return "Tuesday"
-def wednesday():
-    return "Wednesday"
-def thursday():
-    return "Thursday"
-def friday():
-    return "Friday"
-def saturday():
-    return "Saturday"
-def sunday():
-    return "Sunday"
-def default():
-    return "Incorrect day"
+## Looking up the right day of the week using the dictionary method
 
-## Only works with python3
-# def match_day(day):
-#     match day:
-#         case "Monday":
-#             return 1
-#         case "Tuesday":
-#             return 2
-#         case "Wednesday":
-#             return 3
-#         case "Thursday":
-#             return 4
-#         case "Friday":
-#             return 5
-#         case "Saturday":
-#             return 6
-#         case "Sunday":
-#             return 7
-#         case _:
-#             return 0
-
-def match_day(day):
-    if day == "Monday":
-       return 1
-    elif day == "Tuesday":
-       return 2
-    elif day == "Wednesday":
-       return 3
-    elif day == "Thursday":
-       return 4
-    elif day == "Friday":
-       return 5
-    elif day == "Saturday":
-       return 6
-    elif day == "Sunday":
-       return 7
-    else:
-       return 0
-
-weekday = {
-    0: default,
-    1: monday,
-    2: tuesday,
-    3: wednesday,
-    4: thursday,
-    5: friday,
-    6: saturday,
-    7: sunday
+days_of_the_week = {
+    "Incorrect day" : 0,
+    "Monday" : 1,
+    "Tuesday" : 2,
+    "Wednesday" : 3,
+    "Thursday" : 4,
+    "Friday" : 5,
+    "Saturday" : 6,
+    "Sunday" : 7
     }
 
 def which_day(day, add_day):
-    if match_day(day) == 0:
+    day_index = 0
+    for (key, index) in days_of_the_week.items():
+        if key == day:
+            day_index = index
+    if day_index == 0:
         return "Incorrect day"
-    nbr = (match_day(day) + add_day % 7) % 7
+    nbr = (day_index + add_day % 7) % 7
     nbr = 7 if nbr == 0 else nbr
-    day = weekday[nbr]()
-    return day
+    for i, key in enumerate(days_of_the_week.keys()):
+        if i == nbr:
+            return str(key)
 
 def add_time(start, duration, day=None):
     start_list = start.split()
@@ -91,7 +43,7 @@ def add_time(start, duration, day=None):
     total_hr = 12 if total_hr == 0 else total_hr
     new_time = str(total_hr) + ':' + str(total_min % 60).rjust(2, '0') + ' ' + ampm
     if day != None:
-        new_time += ", " + which_day(day[0].upper() + day[1:].lower(), next_day)
+        new_time += ", " + str(which_day(day[0].upper() + day[1:].lower(), next_day))
     if next_day == 1:
         new_time += " (next day)"
     elif next_day > 1:
