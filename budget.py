@@ -4,13 +4,15 @@ class Category:
   def __init__(self,nam):
     self.name = nam
     print(self.name.center(30,'*'))
-  def get_balance(balance):
-    print(balance)
+  def get_balance(self):
+    print(self.balance)
     # return balance
-  def check_funds(amount):
-    if amount > balance:
+  def check_funds(self, amount):
+    if amount > self.balance:
+      print('check: False')
       return False
     else:
+      print('check: True')
       return True
   def deposit(amount,description):
     ledger.append(amount)
@@ -29,6 +31,8 @@ class Category:
 q = Category('Food')
 
 q.get_balance()
+q.check_funds(8783)
+q.check_funds(10)
 
 # def create_spend_chart(categories):
 # class PartyAnimal:
