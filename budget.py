@@ -6,7 +6,7 @@ class Category:
     print(self.name.center(30,'*'))
   def get_balance(self):
     print(self.balance)
-    # return balance
+    return self.balance
   def check_funds(self, amount):
     if amount > self.balance:
       print('check: False')
@@ -14,16 +14,16 @@ class Category:
     else:
       print('check: True')
       return True
-  def deposit(amount,description):
-    ledger.append(amount)
-    ledger.append(description)
-  def withdraw(amount,description):
+  def deposit(self, amount,description):
+    self.ledger.append(amount)
+    self.ledger.append(description)
+  def withdraw(self, amount,description):
     if funds > amount:
-      ledger.append('-', amount)
-      ledger.append(description)
+      self.ledger.append('-', amount)
+      self.ledger.append(description)
       return True
     else:
-      ledger.append(description)
+      self.ledger.append(description)
       return False
   print(ledger)
   # def transfer(amount, category):
