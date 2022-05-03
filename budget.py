@@ -14,16 +14,25 @@ class Category:
     else:
       print('check: True')
       return True
-  def deposit(self, amount,description):
+  def deposit(self, amount, description=None):
     self.ledger.append(amount)
-    self.ledger.append(description)
-  def withdraw(self, amount,description):
-    if funds > amount:
-      self.ledger.append('-', amount)
-      self.ledger.append(description)
+    if description:
+        self.ledger.append(description)
+    else:
+        self.ledger.append('')
+    # self.get_balance()
+    print(self.ledger)
+  def withdraw(self, amount, description=None):
+    if self.check_funds(amount) == True:
+      self.ledger.append(-1 * amount)
+      if description:
+        self.ledger.append(description)
+      else:
+        self.ledger.append('')
+      print(self.ledger)
       return True
     else:
-      self.ledger.append(description)
+      print(self.ledger)
       return False
   print(ledger)
   # def transfer(amount, category):
@@ -33,6 +42,10 @@ q = Category('Food')
 q.get_balance()
 q.check_funds(8783)
 q.check_funds(10)
+q.deposit(450)
+q.deposit(550, 'gift')
+q.withdraw(10)
+q.withdraw(20, 'groceries')
 
 # def create_spend_chart(categories):
 # class PartyAnimal:
