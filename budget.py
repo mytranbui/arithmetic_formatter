@@ -5,39 +5,43 @@ class Category:
   def __init__(self,nam):
     self.name = nam
   def get_balance(self):
-    print(self.balance)
+    # print(self.balance)
     return self.balance
   def check_funds(self, amount):
     if amount > self.balance:
-      print('check: False')
+    #   print('check: False')
       return False
     else:
-      print('check: True')
+    #   print('check: True')
       return True
   def deposit(self, amount, description=""):
     self.ledger.append({"amount": amount, "description": description})
     self.balance += amount
-    print(self.ledger)
+    # print(self.ledger)
   def withdraw(self, amount, description=""):
     if self.check_funds(amount) == True:
       self.ledger.append({"amount": -amount, "description": description})
       self.balance -= amount
-      print(self.ledger)
+    #   print(self.ledger)
       return True
     else:
-      print(self.ledger)
+    #   print(self.ledger)
       return False
   def transfer(self, amount, category):
     if self.check_funds(amount) == False:
       return False
     else:
-      self.withdraw(amount, "Transfer to " + self.name)
+      self.withdraw(amount, "Transfer to " + category.name)
       self.deposit(amount, "Transfer from " + self.name)
       return True
   def __str__(self):
     string = ""
     string += self.name.center(30,'*') + '\n'
-    string += str(self.ledger[0])
+    for transaction in self.ledger:
+        # for key, value in transaction.items():
+            # if key == "description":
+        string += transaction["description"][:23] + str(transaction["amount"]).rjust(30 - len(transaction["description"][:23])) + '\n'
+    # string += str(self.ledger["description"])
     string += "Total: " + str(self.balance)
     return string
   print(ledger)
