@@ -1,9 +1,9 @@
+import budget
 class Category:
   ledger = []
-  balance = 30
+  balance = 4000000
   def __init__(self,nam):
     self.name = nam
-    print(self.name.center(30,'*'))
   def get_balance(self):
     print(self.balance)
     return self.balance
@@ -31,21 +31,41 @@ class Category:
     if self.check_funds(amount) == False:
       return False
     else:
-      self.withdraw(amount, "Transfer to " + category)
-      self.deposit(amount, "Transfer from " + category)
+      self.withdraw(amount, "Transfer to " + self.name)
+      self.deposit(amount, "Transfer from " + self.name)
       return True
+  def __str__(self):
+    string = ""
+    string += self.name.center(30,'*') + '\n'
+    string += str(self.ledger[0])
+    string += "Total: " + str(self.balance)
+    return string
   print(ledger)
 
+food = budget.Category("Food")
+food.deposit(1000, "initial deposit")
+food.withdraw(10.15, "groceries")
+food.withdraw(15.89, "restaurant and more food for dessert")
+print(food.get_balance())
+clothing = budget.Category("Clothing")
+food.transfer(50, clothing)
+clothing.withdraw(25.55)
+clothing.withdraw(100)
+auto = budget.Category("Auto")
+auto.deposit(1000, "initial deposit")
+auto.withdraw(15)
 
-q = Category('Food')
+print(food)
+print(clothing)
+# q = Category('Food')
 
-q.get_balance()
-q.check_funds(8783)
-q.check_funds(10)
-q.deposit(450)
-q.deposit(550, 'gift')
-q.withdraw(10)
-q.withdraw(20, 'groceries')
+# q.get_balance()
+# q.check_funds(8783)
+# q.check_funds(10)
+# q.deposit(450)
+# q.deposit(550, 'gift')
+# q.withdraw(10)
+# q.withdraw(20, 'groceries')
 
 # def create_spend_chart(categories):
 # class PartyAnimal:
