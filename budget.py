@@ -14,28 +14,28 @@ class Category:
     else:
       print('check: True')
       return True
-  def deposit(self, amount, description=None):
-    self.ledger.append(amount)
-    if description:
-        self.ledger.append(description)
-    else:
-        self.ledger.append('')
-    # self.get_balance()
+  def deposit(self, amount, description=""):
+    self.ledger.append({"amount": amount, "description": description})
+    self.balance += amount
     print(self.ledger)
-  def withdraw(self, amount, description=None):
+  def withdraw(self, amount, description=""):
     if self.check_funds(amount) == True:
-      self.ledger.append(-1 * amount)
-      if description:
-        self.ledger.append(description)
-      else:
-        self.ledger.append('')
+      self.ledger.append({"amount": -amount, "description": description})
+      self.balance -= amount
       print(self.ledger)
       return True
     else:
       print(self.ledger)
       return False
+  def transfer(self, amount, category):
+    if self.check_funds(amount) == False:
+      return False
+    else:
+      self.withdraw(amount, "Transfer to " + category)
+      self.deposit(amount, "Transfer from " + category)
+      return True
   print(ledger)
-  # def transfer(amount, category):
+
 
 q = Category('Food')
 
