@@ -37,12 +37,14 @@ class Category:
     string += "Total: " + str(format(float(self.balance), '.2f'))
     return string
   def print_ledger(self):
-    print("print:\n")
     print(self.name)
     print(self.ledger)
 
 def create_spend_chart(categories):
-  print('lol')
+  bar_chart = ""
+  bar_chart += "Percentage spent by category\n"
+  
+  return bar_chart
 
 food = budget.Category("Food")
 food.deposit(1000, "initial deposit")
