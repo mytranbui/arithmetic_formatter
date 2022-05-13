@@ -45,6 +45,9 @@ class Category:
     print(self.ledger)
 
 def create_spend_chart(categories):
+  for transaction in categories.ledger:
+    if transaction["amount"] < 0:
+      print(transaction["amount"])
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
   
@@ -65,3 +68,4 @@ auto.withdraw(15)
 
 print(food)
 print(clothing)
+print(create_spend_chart([food, clothing, auto]))
