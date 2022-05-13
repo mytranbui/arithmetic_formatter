@@ -1,3 +1,4 @@
+import budget
 class Category:
   def __init__(self,nam):
     self.name = nam
@@ -6,6 +7,7 @@ class Category:
   def get_balance(self):
     return self.balance
   def check_funds(self, amount):
+    # return True if amount <= self.balance else False
     if amount > self.balance:
       return False
     else:
@@ -25,7 +27,7 @@ class Category:
       return False
     else:
       self.withdraw(amount, "Transfer to " + category.name)
-      self.deposit(amount, "Transfer from " + self.name)
+      category.deposit(amount, "Transfer from " + self.name)
       return True
   def __str__(self):
     string = ""
@@ -39,48 +41,21 @@ class Category:
     print(self.name)
     print(self.ledger)
 
-# food = Category("Food")
-# food.deposit(1000, "initial deposit")
-# food.withdraw(10.15, "groceries")
-# food.withdraw(15.89, "restaurant and more food for dessert")
-# food.print_ledger()
-# print(food.get_balance())
-# clothing = budget.Category("Clothing")
-# food.transfer(50, clothing)
-# clothing.withdraw(25.55)
-# clothing.withdraw(100)
-# auto = budget.Category("Auto")
-# auto.deposit(1000, "initial deposit")
-# auto.withdraw(15)
+def create_spend_chart(categories):
+  print('lol')
 
-# print(food)
-# print(clothing)
-q = Category('Food')
-q.deposit(1000, "initial deposit")
-q.print_ledger()
-# print(q)
-# q.get_balance()
-# q.check_funds(8783)
-# q.check_funds(10)
-# q.deposit(450)
-# q.deposit(550, 'gift')
-# q.withdraw(10)
-# q.withdraw(20, 'groceries')
+food = budget.Category("Food")
+food.deposit(1000, "initial deposit")
+food.withdraw(10.15, "groceries")
+food.withdraw(15.89, "restaurant and more food for dessert")
+print(food.get_balance())
+clothing = budget.Category("Clothing")
+food.transfer(50, clothing)
+clothing.withdraw(25.55)
+clothing.withdraw(100)
+auto = budget.Category("Auto")
+auto.deposit(1000, "initial deposit")
+auto.withdraw(15)
 
-# def create_spend_chart(categories):
-# class PartyAnimal:
-#     x = 0
-#     name = ''
-#     def __init__(self, nam):
-#         self.name = nam
-#         print(self.name,'constructed')
-#     def party(self):
-#         self.x = self.x + 1
-#         print(self.name,'party count',self.x)
-
-# q = PartyAnimal('Quincy')
-# m = PartyAnimal('Miya')
-
-# q.party()
-# m.party()
-# q.party()
+print(food)
+print(clothing)
