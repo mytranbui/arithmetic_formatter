@@ -1,31 +1,24 @@
-import budget
 class Category:
-  ledger = []
-  balance = 4000000
   def __init__(self,nam):
     self.name = nam
+    self.ledger = []
+    self.balance = 0
   def get_balance(self):
-    # print(self.balance)
     return self.balance
   def check_funds(self, amount):
     if amount > self.balance:
-    #   print('check: False')
       return False
     else:
-    #   print('check: True')
       return True
   def deposit(self, amount, description=""):
     self.ledger.append({"amount": amount, "description": description})
     self.balance += amount
-    # print(self.ledger)
   def withdraw(self, amount, description=""):
     if self.check_funds(amount) == True:
       self.ledger.append({"amount": -amount, "description": description})
       self.balance -= amount
-    #   print(self.ledger)
       return True
     else:
-    #   print(self.ledger)
       return False
   def transfer(self, amount, category):
     if self.check_funds(amount) == False:
@@ -38,31 +31,34 @@ class Category:
     string = ""
     string += self.name.center(30,'*') + '\n'
     for transaction in self.ledger:
-        # for key, value in transaction.items():
-            # if key == "description":
-        string += transaction["description"][:23] + str(transaction["amount"]).rjust(30 - len(transaction["description"][:23])) + '\n'
-    # string += str(self.ledger["description"])
-    string += "Total: " + str(self.balance)
+        string += transaction["description"][:23] + str(format(float(transaction["amount"]), '.2f')).rjust(30 - len(transaction["description"][:23])) + '\n'
+    string += "Total: " + str(format(float(self.balance), '.2f'))
     return string
-  print(ledger)
+  def print_ledger(self):
+    print("print:\n")
+    print(self.name)
+    print(self.ledger)
 
-food = budget.Category("Food")
-food.deposit(1000, "initial deposit")
-food.withdraw(10.15, "groceries")
-food.withdraw(15.89, "restaurant and more food for dessert")
-print(food.get_balance())
-clothing = budget.Category("Clothing")
-food.transfer(50, clothing)
-clothing.withdraw(25.55)
-clothing.withdraw(100)
-auto = budget.Category("Auto")
-auto.deposit(1000, "initial deposit")
-auto.withdraw(15)
+# food = Category("Food")
+# food.deposit(1000, "initial deposit")
+# food.withdraw(10.15, "groceries")
+# food.withdraw(15.89, "restaurant and more food for dessert")
+# food.print_ledger()
+# print(food.get_balance())
+# clothing = budget.Category("Clothing")
+# food.transfer(50, clothing)
+# clothing.withdraw(25.55)
+# clothing.withdraw(100)
+# auto = budget.Category("Auto")
+# auto.deposit(1000, "initial deposit")
+# auto.withdraw(15)
 
-print(food)
-print(clothing)
-# q = Category('Food')
-
+# print(food)
+# print(clothing)
+q = Category('Food')
+q.deposit(1000, "initial deposit")
+q.print_ledger()
+# print(q)
 # q.get_balance()
 # q.check_funds(8783)
 # q.check_funds(10)
