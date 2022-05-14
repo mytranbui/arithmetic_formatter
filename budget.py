@@ -1,4 +1,5 @@
 import budget
+import re
 class Category:
   def __init__(self,nam):
     self.name = nam
@@ -46,9 +47,13 @@ class Category:
     print(self.ledger)
 
 def create_spend_chart(categories):
-  for transaction in categories.ledger:
-    if transaction["amount"] < 0:
-      print(transaction["amount"])
+  lol = ""
+  coco = []
+  for category in categories:
+    lol = str(category)
+    coco = re.findall(r'-?\d*\.?\d+', lol)
+    print(coco)
+    # re.findall(r'\d', category)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
   
@@ -58,7 +63,7 @@ food = budget.Category("Food")
 food.deposit(1000, "initial deposit")
 food.withdraw(10.15, "groceries")
 food.withdraw(15.89, "restaurant and more food for dessert")
-print(food.get_balance())
+# print(food.get_balance())
 clothing = budget.Category("Clothing")
 food.transfer(50, clothing)
 clothing.withdraw(25.55)
@@ -69,4 +74,5 @@ auto.withdraw(15)
 
 print(food)
 print(clothing)
+print(auto)
 print(create_spend_chart([food, clothing, auto]))
