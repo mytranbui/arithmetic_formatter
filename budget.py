@@ -47,17 +47,24 @@ class Category:
     print(self.ledger)
 
 def create_spend_chart(categories):
-  spending_lst = []
-  total = 0
+  spending_all = []
+  spending_by_cat = []
+  perc_lst = []
   for category in categories:
     lol = str(category)
-    spending_lst.append(re.findall(r'-\d*\.?\d+', str(category)))
-    for lst in spending_lst:
-      for nb in lst:
-        total += float(nb)
-      print("yo")
-      print(total)
-    print(spending_lst)
+    spending_all.append(re.findall(r'-\d*\.?\d+', str(category)))
+  print(spending_all)
+  for lst in spending_all:
+    spending = 0
+    for str_nb in lst:
+      spending += float(str_nb)
+    spending_by_cat.append(spending)
+  print(spending_by_cat)
+  total_spending = sum(spending_by_cat)
+  print(total_spending)
+  for spending in spending_by_cat:
+    perc_lst.append(round(spending / total_spending * 10) * 10)
+  print(perc_lst)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
   
