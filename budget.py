@@ -47,28 +47,60 @@ class Category:
     print(self.ledger)
 
 def create_spend_chart(categories):
+  name_cat = []
   spending_all = []
   spending_by_cat = []
   perc_lst = []
   for category in categories:
-    lol = str(category)
     spending_all.append(re.findall(r'-\d*\.?\d+', str(category)))
-  print(spending_all)
+    name_cat.append(re.findall('[A-Z][a-z]+', str(category)[:30]))
+  # print(spending_all)
+  # print(name_cat)
   for lst in spending_all:
     spending = 0
     for str_nb in lst:
       spending += float(str_nb)
     spending_by_cat.append(spending)
-  print(spending_by_cat)
+  # print(spending_by_cat)
   total_spending = sum(spending_by_cat)
-  print(total_spending)
+  # print(total_spending)
   for spending in spending_by_cat:
-    perc_lst.append(round(spending / total_spending * 10) * 10)
-  print(perc_lst)
+    perc_lst.append(round(spending / total_spending * 10))
+  # print(perc_lst)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
-  
+  perc = 100
+  while perc != 0:
+    bar_chart += str(perc).rjust(3) + "|".ljust(len(name_cat) * 4 - 1) + 'END' + '\n'
+    perc -= 10
+  bar_chart += ' ' * 4 + '-' * (len(name_cat) * 3 + 1)
+  for name in name_cat:
+    for char in name:
+      bar_chart += 
+  # print("100|          " + "ENDhkjh")
   return bar_chart
+
+# Percentage spent by category
+# 100|          
+#  90|          
+#  80|          
+#  70|          
+#  60| o        
+#  50| o        
+#  40| o        
+#  30| o        
+#  20| o  o     
+#  10| o  o  o  
+#   0| o  o  o  
+#     ----------
+#      F  C  A  
+#      o  l  u  
+#      o  o  t  
+#      d  t  o  
+#         h     
+#         i     
+#         n     
+#         g
 
 food = budget.Category("Food")
 food.deposit(1000, "initial deposit")
