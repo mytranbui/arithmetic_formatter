@@ -94,7 +94,6 @@ def create_spend_chart(categories):
         vertical_cat += "   "
     vertical_cat += "\n"
   vertical_cat += "           "
-   # added to match the amount of characters needed
   bar_chart += vertical_cat
   # j = 0
   # for lst in name_cat:
