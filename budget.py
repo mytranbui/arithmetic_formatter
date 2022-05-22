@@ -47,6 +47,13 @@ class Category:
     print(self.name)
     print(self.ledger)
 
+def longest_len_str(lst):
+  longest = ""
+  for str in lst:
+    if len(str) > len(longest):
+      longest = str
+  return len(longest)
+
 def create_spend_chart(categories):
   name_cat = []
   spending_all = []
@@ -69,7 +76,7 @@ def create_spend_chart(categories):
   # print(total_spending)
   for spending in spending_by_cat:
     perc_lst.append(round(spending / total_spending * 10) * 10)
-  # print(perc_lst)
+  print(perc_lst)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
   lst = []
@@ -78,7 +85,7 @@ def create_spend_chart(categories):
     lst.append(name_cat[i][0])
     i += 1
   perc = 100
-  while perc != 0:
+  while perc != -10:
     bar_chart += str(perc).rjust(3) + "| "
     for lol in perc_lst:
       if lol >= perc:
@@ -88,7 +95,8 @@ def create_spend_chart(categories):
     bar_chart += '\n'
     perc -= 10
   bar_chart += ' ' * 4 + '-' * (len(lst) * 3 + 1) + '\n'
-  longest_cat = max(len(lst[0]),len(lst[1]))
+  longest_cat = longest_len_str(lst)
+  # longest_cat = max(len(lst[0]),len(lst[1]))
   # print(longest_cat)
   vertical_cat = ""
   for i in range(longest_cat):
@@ -99,8 +107,9 @@ def create_spend_chart(categories):
       except IndexError:
         vertical_cat += "   "
     vertical_cat += "\n"
-  vertical_cat += "           "
   bar_chart += vertical_cat
+  return bar_chart
+
   # for lst in name_cat:
   #   for name in lst:
   #     i = 0
@@ -128,29 +137,7 @@ def create_spend_chart(categories):
   #   i+=1
   # print(len(name_cat))
   # print("100|          " + "ENDhkjh")
-  return bar_chart
-
-# Percentage spent by category
-# 100|          
-#  90|          
-#  80|          
-#  70|          
-#  60| o        
-#  50| o        
-#  40| o        
-#  30| o        
-#  20| o  o     
-#  10| o  o  o  
-#   0| o  o  o  
-#     ----------
-#      F  C  A  
-#      o  l  u  
-#      o  o  t  
-#      d  t  o  
-#         h     
-#         i     
-#         n     
-#         g
+  # return bar_chart
 
 food = budget.Category("Food")
 food.deposit(1000, "initial deposit")
