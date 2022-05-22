@@ -68,20 +68,23 @@ def create_spend_chart(categories):
   total_spending = sum(spending_by_cat)
   # print(total_spending)
   for spending in spending_by_cat:
-    perc_lst.append(round(spending / total_spending * 10))
+    perc_lst.append(round(spending / total_spending * 10) * 10)
   print(perc_lst)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
-  perc = 100
-  while perc != 0:
-    bar_chart += str(perc).rjust(3) + "|".ljust(len(name_cat) * 4 - 1) + 'END' + '\n'
-    perc -= 10
-  bar_chart += ' ' * 4 + '-' * (len(name_cat) * 3 + 1) + '\n'
   lst = []
   i = 0
   while i < len(name_cat):
     lst.append(name_cat[i][0])
     i += 1
+  perc = 100
+  while perc != 0:
+    if perc in perc_lst:
+      bar_chart += str(perc).rjust(3) + "|" + "o".rjust(2)  + 'END' + "\n"
+    else:
+      bar_chart += str(perc).rjust(3) + "|".ljust(len(lst) * 4 - 1) + 'END' + '\n'
+    perc -= 10
+  bar_chart += ' ' * 4 + '-' * (len(lst) * 3 + 1) + '\n'
   longest_cat = max(len(lst[0]),len(lst[1]))
   print(longest_cat)
   vertical_cat = ""
@@ -95,21 +98,6 @@ def create_spend_chart(categories):
     vertical_cat += "\n"
   vertical_cat += "           "
   bar_chart += vertical_cat
-  # j = 0
-  # for lst in name_cat:
-  #   for name in lst:
-  #     print("yo",name[0])
-  #     print("po",name[0][0])
-    # while j < len(name):
-    # for name in lst:
-    #   i = 0
-    #   bar_chart += 'xxx'
-    #   while i < len(name_cat):
-    #     bar_chart += name[i].rjust(3)
-    #     i += 1
-    #   # for char  in name:
-    #   #   bar_chart += char.rjust(2)
-    #   bar_chart += 'xx\n'
   # for lst in name_cat:
   #   for name in lst:
   #     i = 0
