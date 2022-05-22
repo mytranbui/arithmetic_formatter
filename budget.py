@@ -87,8 +87,8 @@ def create_spend_chart(categories):
   perc = 100
   while perc != -10:
     bar_chart += str(perc).rjust(3) + "| "
-    for lol in perc_lst:
-      if lol >= perc:
+    for perc_cat in perc_lst:
+      if perc_cat >= perc:
         bar_chart += "o".ljust(3)
       else:
         bar_chart += '   '
@@ -96,7 +96,6 @@ def create_spend_chart(categories):
     perc -= 10
   bar_chart += ' ' * 4 + '-' * (len(lst) * 3 + 1) + '\n'
   longest_cat = longest_len_str(lst)
-  # print(longest_cat)
   vertical_cat = ""
   for i in range(longest_cat):
     vertical_cat += "    "
@@ -109,7 +108,6 @@ def create_spend_chart(categories):
     if i != longest_cat -1 :
       vertical_cat += "\n"
   bar_chart += vertical_cat
-  # print(longest_cat)
   return bar_chart
 
 # food = budget.Category("Food")
