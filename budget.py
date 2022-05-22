@@ -57,8 +57,8 @@ def create_spend_chart(categories):
     spending_all.append(re.findall(r'-\d*\.?\d+', str(category)))
     name_cat.append(re.findall('\*([A-Z][a-z]+)', str(category)[:30]))
   # name_cat.append(re.findall('[A-Z][a-z]+', str(categories[0-3])))
-  print(spending_all)
-  print(name_cat)
+  # print(spending_all)
+  # print(name_cat)
   for lst in spending_all:
     spending = 0
     for str_nb in lst:
@@ -69,7 +69,7 @@ def create_spend_chart(categories):
   # print(total_spending)
   for spending in spending_by_cat:
     perc_lst.append(round(spending / total_spending * 10) * 10)
-  print(perc_lst)
+  # print(perc_lst)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
   lst = []
@@ -79,14 +79,17 @@ def create_spend_chart(categories):
     i += 1
   perc = 100
   while perc != 0:
-    if perc in perc_lst:
-      bar_chart += str(perc).rjust(3) + "|" + "o".rjust(2)  + 'END' + "\n"
-    else:
-      bar_chart += str(perc).rjust(3) + "|".ljust(len(lst) * 4 - 1) + 'END' + '\n'
+    bar_chart += str(perc).rjust(3) + "| "
+    for lol in perc_lst:
+      if lol >= perc:
+        bar_chart += "o".ljust(3)
+      else:
+        bar_chart += '   '
+    bar_chart += '\n'
     perc -= 10
   bar_chart += ' ' * 4 + '-' * (len(lst) * 3 + 1) + '\n'
   longest_cat = max(len(lst[0]),len(lst[1]))
-  print(longest_cat)
+  # print(longest_cat)
   vertical_cat = ""
   for i in range(longest_cat):
     vertical_cat += "    "
