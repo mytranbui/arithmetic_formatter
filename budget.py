@@ -75,7 +75,7 @@ def create_spend_chart(categories):
   total_spending = sum(spending_by_cat)
   # print(total_spending)
   for spending in spending_by_cat:
-    perc_lst.append(round(spending / total_spending * 10) * 10)
+    perc_lst.append((spending / total_spending) * 100)
   print(perc_lst)
   bar_chart = ""
   bar_chart += "Percentage spent by category\n"
@@ -106,9 +106,12 @@ def create_spend_chart(categories):
         vertical_cat += name[i].center(3)
       except IndexError:
         vertical_cat += "   "
-    vertical_cat += "\n"
+    vertical_cat += " \n"
   bar_chart += vertical_cat
   return bar_chart
+
+#         # m  \n           e  \n           n  \n           t  \n' 
+#         # m  \n           e  \n           n  \n           t  '
 
   # for lst in name_cat:
   #   for name in lst:
